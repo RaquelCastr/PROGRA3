@@ -57,7 +57,7 @@ public class ControllerAcceso extends HttpServlet {
 
 		if (valoracceso == 1) {
 			ClsUsuario clsUsuario = new ClsUsuario();
-			var Usuario = clsUsuario.MostrarUsuarios();
+			var Usuario = clsUsuario.ListadoUSUARIOS();
 			response.sendRedirect("Saludo.jsp");
 			for (var iterar : Usuario) {
 				System.out.println(iterar.getUsuario());

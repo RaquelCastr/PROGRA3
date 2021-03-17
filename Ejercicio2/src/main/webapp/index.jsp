@@ -17,6 +17,8 @@
 		<input type="text" name="pass" placeholder="Escribe tu contraseña">
 		<br>
 		<input type="submit">
+		<%String saludo ="hola mundo desde JAVA"; %>
+		<h1 value=<%=saludo %>></h1>
 	</form>
 </body>
 </html>

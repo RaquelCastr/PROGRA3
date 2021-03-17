@@ -13,27 +13,38 @@ import com.Rodrigo.Entidades.usuario;
 public class ClsUsuario {
 
 	ConexionBd cn = new ConexionBd();
-    Connection conexion = cn.RetornarConexion();
+    Connection con = cn.RetornarConexion();
     
-    public ArrayList<usuario> MostrarUsuarios(){
-    ArrayList<usuario> usuarios = new ArrayList<>();
+    public ArrayList<usuario> ListadoUSUARIOS(){
+    ArrayList<usuario> Lista = new ArrayList<>();
         try {
-            CallableStatement Statement = conexion.prepareCall("call SP_S_Usuarios");
-            ResultSet resultadoDeConsulta = Statement.executeQuery();
-            while(resultadoDeConsulta.next()){
-            usuario usuario = new usuario();
-            usuario.setIdUsuario(resultadoDeConsulta.getInt("idUsuario"));
-            usuario.setUsuario(resultadoDeConsulta.getString("Usuario"));
-            usuario.setPassword(resultadoDeConsulta.getString("PassWord"));
-            usuario.setId(resultadoDeConsulta.getInt("tipoUsuario"));
-            if(usuario.getId() == 2){
-                usuarios.add(usuario);
+            CallableStatement consulta = con.prepareCall("call SP_S_Usuarios");
+            ResultSet rs = consulta.executeQuery();
+            while(rs.next()){
+            usuario user = new usuario();
+            user.setIdUsuario(rs.getInt("idUsuario"));
+            user.setUsuario(rs.getString("Usuario"));
+            user.setPassword(rs.getString("PassWord"));
+            user.setId(rs.getInt("tipoUsuario"));
+            Lista.add(user); 
             }
-            }
-            conexion.close();
+            
+            
         } catch (Exception e) {
+        	//JOptionPane.showMessageDialog(null, "Ha ocurrido un error en: + e")
             JOptionPane.showMessageDialog(null, e);
         }
-        return usuarios;
+        return Lista;
+        
+      }
+    public void Eliminar(usuario user) {
+    	try {CallableStatement consulta = con.prepareCall("SP_D_USER(?)");
+    	consulta.setInt("pIdUsuario", user.getIdUsuario());
+    	consulta.executeQuery();
+    	System.out.println("Exito");
+    			} catch (Exception e) {
+    				System.out.println(e);
+    				//TODO: handle exception
+    			}
     }
 }

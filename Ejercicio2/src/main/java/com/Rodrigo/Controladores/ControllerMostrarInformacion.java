@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.Rodrigo.DAO.ClsUsuario;
+import com.Rodrigo.Entidades.usuario;
 import com.google.gson.Gson;
 
 /**
@@ -30,7 +31,13 @@ public class ControllerMostrarInformacion extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		ClsUsuario clsusu= new ClsUsuario();
+		usuario usu = new usuario();
+		
+		usu.setIdUsuario(Integer.parseInt(request.getParameter("usu")));
+		clsusu.Eliminar(usu);
+		response.sendRedirect("Saludo.jsp");
 	}
 
 	/**
@@ -42,7 +49,7 @@ public class ControllerMostrarInformacion extends HttpServlet {
 		Gson json = new Gson();
 		
 		ClsUsuario clsusuario = new ClsUsuario();
-		response.getWriter().append(json.toJson(clsusuario.MostrarUsuarios()));
+		response.getWriter().append(json.toJson(clsusuario.ListadoUSUARIOS()));
 		
 	}
 
