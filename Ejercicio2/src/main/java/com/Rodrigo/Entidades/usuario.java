@@ -29,4 +29,6 @@ public class usuario extends tipoUsuarios{
     public void setPassword(String Password) {
         this.Password = Password;
     }
+
 }
+

@@ -43,8 +43,36 @@ public class ClsUsuario {
     	consulta.executeQuery();
     	System.out.println("Exito");
     			} catch (Exception e) {
-    				System.out.println(e);
+    				System.out.println(e);}
     				//TODO: handle exception
     			}
-    }
+    	
+    	public void Actualizar(usuario user) {
+        	try {CallableStatement consulta = con.prepareCall("SP_s_Usuarios(?, ?, ?)");
+        	consulta.setString("PUsuario", user.getUsuario());
+        	consulta.setString("PPass", user.getPassword());
+        	consulta.setInt("pidUsuario", user.getIdUsuario());
+        	consulta.executeQuery();
+        	System.out.println("Exito");
+        			} catch (Exception e) {
+        				System.out.println(e);
+        				//TODO: handle exception
+        			}
+    	}
+  
+        	public void Agregar(usuario user) {
+            	try {CallableStatement consulta = con.prepareCall("SP_I_Usuario(?, ?, ?)");
+            	consulta.setString("PUsuario", user.getUsuario());
+            	consulta.setString("PPass", user.getPassword());
+            	consulta.setString("pTipoUsuario", user.getTipoUser());
+            	consulta.executeQuery();
+            	System.out.println("Exito");
+            			} catch (Exception e) {
+            				System.out.println(e);
+            				//TODO: handle exception
+    	}
+        	}
 }
+    	
+
+
