@@ -1,6 +1,8 @@
 package com.Rodrigo.Controladores;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.Rodrigo.DAO.ClsUsuario;
 import com.Rodrigo.Entidades.Loguin;
+import com.Rodrigo.Entidades.usuario;
 import com.Rodrigo.Negocio.clsLoguin;
 
 /**
@@ -57,7 +60,7 @@ public class ControllerAcceso extends HttpServlet {
 
 		if (valoracceso == 1) {
 			ClsUsuario clsUsuario = new ClsUsuario();
-			var Usuario = clsUsuario.ListadoUSUARIOS();
+			ArrayList<usuario> Usuario = clsUsuario.ListadoUSUARIOS();
 			response.sendRedirect("Saludo.jsp");
 			for (var iterar : Usuario) {
 				System.out.println(iterar.getUsuario());
